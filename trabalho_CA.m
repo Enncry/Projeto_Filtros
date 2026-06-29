@@ -1,0 +1,141 @@
+clc;
+clear;
+close all;
+
+% Valores em mH
+indutores_reais = [0.10, 0.12, 0.15, 0.18, 0.22, 0.27, 0.33, 0.39, 0.47, 0.56, 0.68, 0.82, 1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2, 10, 12, 15];
+% Valores em uF
+capacitores_reais = [1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2, 10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82, 100];
+
+% Pedindo os dados para o usúario
+f_corte = input('Digite a frequência de corte do filtro passa-baixas(Hz): ');
+imp_carga = input('Digite a impedância da carga do filtro passa-baixas(Ohms): ');
+Q = input('Digite o fator de qualidade: ');
+
+% Filtro passa-baixas escolhido: 
+% RLC em série com Vout medida sobre o capacitor
+
+% H(s) = 1/(LC)/(S² + (R/L)S + 1/(LC))
+
+Wc= f_corte * 2* pi;
+
+% R/L = fc/Q -> L = R*Q/fc
+L_ideal = imp_carga * Q / Wc;
+
+% Wc² = 1/(LC) -> C = 1/(LWc²)
+C_ideal = 1 / (L_ideal * Wc^2);
+
+% Convertendo para mH e uF
+L_ideal_mH = (imp_carga * Q / Wc) * 10^3;
+C_ideal_uF = (1 / (L_ideal * Wc^2)) * 10^6;
+
+% Encontrar o indutor e capacitor mais próximos dos valores ideais
+[~, idx_L] = min(abs(indutores_reais - L_ideal_mH)); 
+[~, idx_C] = min(abs(capacitores_reais - C_ideal_uF)); 
+
+% Valores Reais no SI
+L_real = indutores_reais(idx_L) * 10^-3;
+C_real = capacitores_reais(idx_C) * 10^-6;
+
+fprintf("\nFiltro Passa-baixas: \n")
+
+fprintf("Indutor ideal: %.2fmH\n", L_ideal_mH);
+fprintf("Capacidor ideal: %.2fuF\n\n", C_ideal_uF);
+
+fprintf("Indutor real mais próximo: %.2fmH\n", indutores_reais(idx_L));
+fprintf("Capacidor real mais próximo: %.2fuF\n", capacitores_reais(idx_C));
+
+
+% Calculando os denominadores do polinômio para passar pra função
+R_div_L = imp_carga/L_ideal;
+Um_div_LC = 1 / (L_ideal * C_ideal);
+
+Wc_quadrado = Wc^2;
+
+cima_ideal = [Wc_quadrado];
+baixo_ideal =[1,R_div_L, Um_div_LC];
+
+% Função de transferência ideal (recebe os denominadores dos polinômios em
+% vetores)
+H_ideal = tf(cima_ideal,baixo_ideal);
+
+R_div_L_real = imp_carga/L_real;
+Um_div_LC_real = 1 / (L_real * C_real);
+
+cima_real = [Um_div_LC_real];
+baixo_real =[1,R_div_L_real, Um_div_LC_real];
+
+% Função de transferência real
+H_real = tf(cima_real,baixo_real);
+
+% Cria um pacote de opções para o gráfico
+opcoes = bodeoptions;
+% Altera a unidade de frequência para Hertz
+opcoes.FreqUnits = 'Hz';
+
+% Gerando gráfico comparativo para o filtro passa-baixas
+figure(1);
+bode(H_ideal, H_real, opcoes);
+grid on;
+legend('Resposta Ideal', 'Resposta Real');
+title('Comparativo do Filtro Passa-Baixas');
+
+% Filtro passa-altas escolhido: 
+% Capacitor em série com o paralelo de um indutor e resistor com Vout 
+% medida sobre o resistor.
+
+% H(s) = S²/(S² + 1/(RC)S + 1/LC))
+
+% Wc/Q = 1/RC -> C = Q/(RWc)
+% C ideal em uF
+C_ideal = Q/(imp_carga * Wc);
+
+% Wc² = 1/(LC) -> L = 1/(CWc²)
+L_ideal = 1 / (C_ideal * Wc_quadrado);
+
+% Convertendo para mH e uF
+C_ideal_uF = C_ideal * 10^6;
+L_ideal_mH = L_ideal * 10^3;
+
+% Encontrar o indutor e capacitor mais próximos dos valores ideais
+[~, idx_L] = min(abs(indutores_reais - L_ideal_mH)); 
+[~, idx_C] = min(abs(capacitores_reais - C_ideal_uF)); 
+
+% Valores Reais no SI
+L_real = indutores_reais(idx_L) * 10^-3;
+C_real = capacitores_reais(idx_C) * 10^-6;
+
+fprintf("\nFiltro Passa-altas: \n");
+
+fprintf("Indutor ideal: %.2fmH\n", L_ideal_mH);
+fprintf("Capacitor ideal: %.2fuF\n\n", C_ideal_uF);
+
+fprintf("Indutor real mais próximo: %.2fmH\n", indutores_reais(idx_L));
+fprintf("Capacitor real mais próximo: %.2fuF\n", capacitores_reais(idx_C));
+
+% Calculando os denominadores do polinômio para passar pra função
+Um_div_RC = 1 / (imp_carga * C_ideal);
+Um_div_LC = 1 / (L_ideal * C_ideal);
+
+cima_ideal = [1,0,0];
+baixo_ideal =[1,Um_div_RC, Um_div_LC];
+
+% Função de transferência ideal (recebe os denominadores dos polinômios em
+% vetores)
+H_ideal = tf(cima_ideal,baixo_ideal);
+
+Um_div_RC_real = 1 / (imp_carga * C_real);
+Um_div_LC_real = 1 / (L_real * C_real);
+
+cima_real = [1,0,0];
+baixo_real =[1,Um_div_RC_real, Um_div_LC_real];
+
+% Função de transferência real
+H_real = tf(cima_real,baixo_real);
+
+% Gerando gráfico comparativo para o filtro passa-altas
+figure(2);
+bode(H_ideal, H_real,opcoes);
+grid on;
+legend('Resposta Ideal', 'Resposta Real');
+title('Comparativo do Filtro Passa-Altas');
