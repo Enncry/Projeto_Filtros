@@ -54,7 +54,7 @@ O script foi desenvolvido em MATLAB e segue o seguinte fluxo algorítmico:
 
 ### Componentes Calculados vs. Comerciais
 | Filtro | Componente | Valor Ideal | Valor Comercial Sugerido |
-| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- |
 | **Passa-Baixas** | Indutor (L) | 0.45 mH | 0.47 mH |
 | | Capacitor (C) | 14.07 uF | 15.00 uF |
 | **Passa-Altas** | Indutor (L) | 0.90 mH | 0.82 mH |
