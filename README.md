@@ -55,7 +55,7 @@ O script foi desenvolvido em MATLAB e segue o seguinte fluxo algorítmico:
 ### Componentes Calculados vs. Comerciais
 | Filtro | Componente | Valor Ideal | Valor Comercial Sugerido |
 | :--- | :--- | :--- | :--- |
-| **Passa-Baixas** | Indutor (L) | 0.45mH | 0.45mH |
+| **Passa-Baixas** | Indutor (L) | 0.45mH | 0.47mH |
 | | Capacitor (C) | 14.07uF | 15.00uF |
 | **Passa-Altas** | Indutor (L) | 0.90mH | 0.82mH |
 | | Capacitor (C) | 7.03uF | 6.80uF |
@@ -67,9 +67,9 @@ O script foi desenvolvido em MATLAB e segue o seguinte fluxo algorítmico:
 ![Gráfico Passa-Altas](passa-altas.png)
 
 ## iii. Análise Crítica
-Ao substituir os valores ideais matemáticos pelos valores da série comercial E12/E24, observou-se que a frequência de corte real do filtro se deslocou para aproximadamente [XXX] Hz no Passa-Baixas e [XXX] Hz no Passa-Altas. 
+Ao substituir os valores ideais matemáticos pelos valores da série comercial, observou-se que a frequência de corte real do filtro se deslocou para aproximadamente  Hz no Passa-Baixas e [XXX] Hz no Passa-Altas. 
 
 O maior desvio percentual ocorreu no [diga se foi o indutor ou capacitor do PB ou PA], onde o valor comercial ficou [X]% distante do ideal. Na prática, um pequeno deslocamento na frequência de corte (como o observado nos gráficos) gera uma leve zona de sobreposição (overlap) ou um pequeno "buraco" na resposta de frequência da caixa de som ao redor dos 2kHz. No entanto, considerando as tolerâncias naturais dos alto-falantes mecânicos, essa diferença provocada pelos componentes padronizados [conclua se seria audível ou desprezível para um ouvido não treinado].
 
 ## iv. Conclusões
-O projeto cumpriu os requisitos especificados, entregando uma ferramenta funcional capaz de automatizar o projeto de crossovers. O maior desafio durante o desenvolvimento foi [cite algo que te deu trabalho, como "compatibilizar as unidades de medida para o cálculo correto no Gráfico de Bode" ou "deduzir a função de transferência do passa-altas"].
+O projeto cumpriu os requisitos especificados, entregando uma ferramenta funcional capaz de automatizar o projeto de crossovers.
