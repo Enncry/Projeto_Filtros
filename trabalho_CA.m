@@ -37,6 +37,8 @@ C_ideal_uF = (1 / (L_ideal * Wc^2)) * 10^6;
 L_real = indutores_reais(idx_L) * 10^-3;
 C_real = capacitores_reais(idx_C) * 10^-6;
 
+nova_freq = 1/(2 * pi * sqrt(L_real * C_real));
+
 fprintf("\nFiltro Passa-baixas: \n")
 
 fprintf("Indutor ideal: %.2fmH\n", L_ideal_mH);
@@ -44,6 +46,7 @@ fprintf("Capacidor ideal: %.2fuF\n\n", C_ideal_uF);
 
 fprintf("Indutor real mais próximo: %.2fmH\n", indutores_reais(idx_L));
 fprintf("Capacidor real mais próximo: %.2fuF\n", capacitores_reais(idx_C));
+fprintf("Nova Frequência de Corte: %.2fHz\n\n", nova_freq);
 
 
 % Calculando os denominadores do polinômio para passar pra função
@@ -105,13 +108,16 @@ L_ideal_mH = L_ideal * 10^3;
 L_real = indutores_reais(idx_L) * 10^-3;
 C_real = capacitores_reais(idx_C) * 10^-6;
 
+nova_freq = 1/(2 * pi * sqrt(L_real * C_real));
+
 fprintf("\nFiltro Passa-altas: \n");
 
 fprintf("Indutor ideal: %.2fmH\n", L_ideal_mH);
-fprintf("Capacitor ideal: %.2fuF\n\n", C_ideal_uF);
+fprintf("Capacitor ideal: %.2fuF\n", C_ideal_uF);
 
 fprintf("Indutor real mais próximo: %.2fmH\n", indutores_reais(idx_L));
 fprintf("Capacitor real mais próximo: %.2fuF\n", capacitores_reais(idx_C));
+fprintf("Nova Frequência de Corte: %.2fHz\n\n", nova_freq);
 
 % Calculando os denominadores do polinômio para passar pra função
 Um_div_RC = 1 / (imp_carga * C_ideal);

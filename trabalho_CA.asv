@@ -68,8 +68,14 @@ baixo_real =[1,R_div_L_real, Um_div_LC_real];
 % Função de transferência real
 H_real = tf(cima_real,baixo_real);
 
+% Cria um pacote de opções para o gráfico
+opcoes = bodeoptions;
+% Altera a unidade de frequência para Hertz
+opcoes.FreqUnits = 'Hz';
+
 % Gerando gráfico comparativo para o filtro passa-baixas
-bode(H_ideal, H_real);
+figure(1);
+bode(H_ideal, H_real, opcoes);
 grid on;
 legend('Resposta Ideal', 'Resposta Real');
 title('Comparativo do Filtro Passa-Baixas');
@@ -99,10 +105,13 @@ L_ideal_mH = L_ideal * 10^3;
 L_real = indutores_reais(idx_L) * 10^-3;
 C_real = capacitores_reais(idx_C) * 10^-6;
 
+nova_freq = 1/(2 * pi * sqrt(L_real * C_real));
+
 fprintf("\nFiltro Passa-altas: \n");
 
 fprintf("Indutor ideal: %.2fmH\n", L_ideal_mH);
 fprintf("Capacitor ideal: %.2fuF\n\n", C_ideal_uF);
+fprintf("Nova Frequência de Corte:")
 
 fprintf("Indutor real mais próximo: %.2fmH\n", indutores_reais(idx_L));
 fprintf("Capacitor real mais próximo: %.2fuF\n", capacitores_reais(idx_C));
@@ -127,8 +136,9 @@ baixo_real =[1,Um_div_RC_real, Um_div_LC_real];
 % Função de transferência real
 H_real = tf(cima_real,baixo_real);
 
-% Gerando gráfico comparativo para o filtro passa-baixas
-bode(H_ideal, H_real);
+% Gerando gráfico comparativo para o filtro passa-altas
+figure(2);
+bode(H_ideal, H_real,opcoes);
 grid on;
 legend('Resposta Ideal', 'Resposta Real');
-title('Comparativo do Filtro Passa-Baixas');
+title('Comparativo do Filtro Passa-Altas');
