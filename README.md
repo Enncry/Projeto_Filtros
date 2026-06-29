@@ -53,12 +53,13 @@ O script foi desenvolvido em MATLAB e segue o seguinte fluxo algorítmico:
 ## H. Análise dos Resultados
 
 ### Componentes Calculados vs. Comerciais
-| Filtro | Componente | Valor Ideal | Valor Comercial Sugerido |
-| :--- | :--- | :--- | :--- |
-| **Passa-Baixas** | Indutor (L) | 0.45mH | 0.47mH |
-| | Capacitor (C) | 14.07uF | 15.00uF |
-| **Passa-Altas** | Indutor (L) | 0.90mH | 0.82mH |
+| Filtro | Componente | Valor Ideal | Valor Comercial Sugerido | Frequência de corte ideal | Frequência de corte real |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Passa-Baixas** | Indutor (L) | 0.45mH | 0.47mH | 2000.0Hz | 1895.51Hz |
+| | Capacitor (C) | 14.07uF | 15.00uF | | |
+| **Passa-Altas** | Indutor (L) | 0.90mH | 0.82mH | 2000.0Hz | 2131.37Hz |
 | | Capacitor (C) | 7.03uF | 6.80uF |
+| |
 
 ### Gráficos Comparativos (Bode)
 *(Abaixo estão os gráficos gerados pela ferramenta)*
