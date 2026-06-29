@@ -53,13 +53,12 @@ O script foi desenvolvido em MATLAB e segue o seguinte fluxo algorítmico:
 ## H. Análise dos Resultados
 
 ### Componentes Calculados vs. Comerciais
-| Filtro | Componente | Valor Ideal | Valor Comercial Sugerido | Frequência de corte ideal | Frequência de corte real |
+| Filtro | Componente | Valor Ideal | Valor Comercial Sugerido |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Passa-Baixas** | Indutor (L) | 0.45mH | 0.47mH | 2000.0Hz | 1895.51Hz |
-| | Capacitor (C) | 14.07uF | 15.00uF | | |
-| **Passa-Altas** | Indutor (L) | 0.90mH | 0.82mH | 2000.0Hz | 2131.37Hz |
-| | Capacitor (C) | 7.03uF | 6.80uF |
-| |
+| **Passa-Baixas** | Indutor (L) | 0.45 mH | 0.47 mH |
+| | Capacitor (C) | 14.07 uF | 15.00 uF |
+| **Passa-Altas** | Indutor (L) | 0.90 mH | 0.82 mH |
+| | Capacitor (C) | 7.03 uF | 6.80 uF |
 
 ### Gráficos Comparativos (Bode)
 *(Abaixo estão os gráficos gerados pela ferramenta)*
@@ -68,9 +67,11 @@ O script foi desenvolvido em MATLAB e segue o seguinte fluxo algorítmico:
 ![Gráfico Passa-Altas](passa-altas.png)
 
 ## iii. Análise Crítica
-Ao substituir os valores ideais matemáticos pelos valores da série comercial, observou-se que a frequência de corte real do filtro se deslocou para aproximadamente  Hz no Passa-Baixas e [XXX] Hz no Passa-Altas. 
+Ao substituir os valores ideais matemáticos pelos valores da série comercial, observou-se que a frequência de corte real do filtro se deslocou para aproximadamente 1895.51 Hz no Passa-Baixas e 2131,37 Hz no Passa-Altas. 
 
-O maior desvio percentual ocorreu no [diga se foi o indutor ou capacitor do PB ou PA], onde o valor comercial ficou [X]% distante do ideal. Na prática, um pequeno deslocamento na frequência de corte (como o observado nos gráficos) gera uma leve zona de sobreposição (overlap) ou um pequeno "buraco" na resposta de frequência da caixa de som ao redor dos 2kHz. No entanto, considerando as tolerâncias naturais dos alto-falantes mecânicos, essa diferença provocada pelos componentes padronizados [conclua se seria audível ou desprezível para um ouvido não treinado].
+O maior desvio percentual ocorreu no indutor do passa-altas, onde o valor comercial ficou 8,9% distante do ideal. Na prática, um pequeno deslocamento na frequência de corte (como o observado nos gráficos) gera uma leve zona de sobreposição (overlap) ou um pequeno "buraco" na resposta de frequência da caixa de som ao redor dos 2kHz. No entanto, considerando as tolerâncias naturais dos alto-falantes mecânicos, essa diferença provocada pelos componentes padronizados seria praticamente desprezível.
 
 ## iv. Conclusões
-O projeto cumpriu os requisitos especificados, entregando uma ferramenta funcional capaz de automatizar o projeto de crossovers.
+O projeto cumpriu os requisitos especificados, entregando uma ferramenta funcional capaz de automatizar o projeto de crossovers. O maior desafio durante o desenvolvimento foi deduzir a função de transferência do passa-altas.
+
+A limitação de utilizar componentes do mundo real demonstra que o projeto de engenharia raramente é exato. A teoria fornece o alvo, mas a engenharia lida com a otimização dos recursos disponíveis. A ferramenta criada garante que possamos prever exatamente o impacto das limitações comerciais na resposta final do produto antes de qualquer montagem física.
