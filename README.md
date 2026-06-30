@@ -10,27 +10,31 @@ O objetivo principal é calcular os componentes ideais e selecionar os component
 
 **Parâmetros de Projeto:**
 * Tipo de Filtro: Butterworth de 2ª Ordem (Fator de Qualidade Q = 0.707)
-* Frequência de Corte (fc): 2000 Hz
+* Frequência de Corte ($f_c$): 2000 Hz
 * Impedância da Carga (Alto-falantes): 8 Ohms
 
 ## E. Funções de Transferência e Fórmulas
 Para a modelagem matemática, assumiu-se as seguintes funções de transferência (H(s)) no domínio de Laplace:
 
 **Filtro Passa-Baixas (Woofer):** Circuito RLC série com a saída sobre o capacitor.
-H(s) = (1/LC) / (s^2 + (R/L)s + 1/LC)
+```math
+H(s) = \frac{\frac{1}{LC}}{s^2 + \frac{R}{L}s + \frac{1}{LC}}
+```
 
 Fórmulas derivadas para o projeto:
-1. L = (R * Q) / Wc
-2. C = 1 / (L * Wc^2)
+1. $L = \frac{RQ}{W_c}$
+2. $C = \frac{1}{LW_c^2}$
 
 **Filtro Passa-Altas (Tweeter):** Capacitor em série com um indutor e resistor em paralelo (saída sobre o resistor).
-H(s) = s^2 / (s^2 + (1/RC)s + 1/LC)
+```math
+H(s) = \frac{s^2}{s^2 + \frac{1}{RC}s + \frac{1}{LC}}
+```
 
 Fórmulas derivadas para o projeto:
-1. C = Q / (R * Wc)
-2. L = 1 / (C * Wc^2)
+1. $C = \frac{Q}{RW_c}$
+2. $L = \frac{1}{CW_c^2}$
 
-*Nota: Wc é a frequência angular, dada por Wc = 2 * pi * fc.*
+*Nota:* $W_c$ *é a frequência angular, dada por* $W_c = 2 \pi f_c.$
 
 ## F. Lógica do Programa
 O script foi desenvolvido em MATLAB e segue o seguinte fluxo algorítmico:
