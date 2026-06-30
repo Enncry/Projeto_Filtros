@@ -17,6 +17,12 @@ O objetivo principal é calcular os componentes ideais e selecionar os component
 Para a modelagem matemática, assumiu-se as seguintes funções de transferência (H(s)) no domínio de Laplace:
 
 **Filtro Passa-Baixas (Woofer):** Circuito RLC série com a saída sobre o capacitor.
+<p align="center">
+  <img src="Imagens/Filtro_passa-baixas.png" width="600" alt="Esquema do Filtro Passa-Baixas">
+</p>
+
+**Função de transferência:**
+
 ```math
 H(s) = \frac{\frac{1}{LC}}{s^2 + \frac{R}{L}s + \frac{1}{LC}}
 ```
@@ -26,6 +32,13 @@ Fórmulas derivadas para o projeto:
 2. $C = \frac{1}{LW_c^2}$
 
 **Filtro Passa-Altas (Tweeter):** Capacitor em série com um indutor e resistor em paralelo (saída sobre o resistor).
+<p align="center">
+  <img src="Imagens/Filtro_passa-altas.png" width="600" alt="Esquema do Filtro Passa-Altas">
+</p>
+
+**Função de transferência:**
+
+
 ```math
 H(s) = \frac{s^2}{s^2 + \frac{1}{RC}s + \frac{1}{LC}}
 ```
@@ -67,8 +80,8 @@ O script foi desenvolvido em MATLAB e segue o seguinte fluxo algorítmico:
 ### Gráficos Comparativos (Bode)
 *(Abaixo estão os gráficos gerados pela ferramenta)*
 
-![Gráfico Passa-Baixas](passa-baixas.png)
-![Gráfico Passa-Altas](passa-altas.png)
+![Gráfico Passa-Baixas](Imagens/passa-baixas.png)
+![Gráfico Passa-Altas](Imagens/passa-altas.png)
 
 ## iii. Análise Crítica
 Ao substituir os valores ideais matemáticos pelos valores da série comercial, observou-se que a frequência de corte real do filtro se deslocou para aproximadamente 1895.51 Hz no Passa-Baixas e 2131,37 Hz no Passa-Altas. 
