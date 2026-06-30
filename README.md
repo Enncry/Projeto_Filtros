@@ -84,9 +84,9 @@ O script foi desenvolvido em MATLAB e segue o seguinte fluxo algorítmico:
 ![Gráfico Passa-Altas](Imagens/passa-altas.png)
 
 ## iii. Análise Crítica
-Ao substituir os valores ideais matemáticos pelos valores da série comercial, observou-se que a frequência de corte real do filtro se deslocou para aproximadamente 1895.51 Hz no Passa-Baixas e 2131,37 Hz no Passa-Altas. 
+Ao substituir os valores ideais matemáticos pelos valores da série comercial, observou-se que a frequência de corte real do filtro se deslocou para aproximadamente `1895.51` Hz no Passa-Baixas e `2131,37` Hz no Passa-Altas. 
 
-O maior desvio percentual ocorreu no indutor do passa-altas, onde o valor comercial ficou 8,9% distante do ideal. Na prática, um pequeno deslocamento na frequência de corte (como o observado nos gráficos) gera uma leve zona de sobreposição (overlap) ou um pequeno "buraco" na resposta de frequência da caixa de som ao redor dos 2kHz. No entanto, considerando as tolerâncias naturais dos alto-falantes mecânicos, essa diferença provocada pelos componentes padronizados seria praticamente desprezível.
+O maior desvio percentual ocorreu no indutor do passa-altas, onde o valor comercial ficou `8,9%` distante do ideal. Na prática, um pequeno deslocamento na frequência de corte (como o observado nos gráficos) gera uma leve zona de sobreposição (overlap) ou um pequeno "buraco" na resposta de frequência da caixa de som ao redor dos 2kHz. No entanto, considerando as tolerâncias naturais dos alto-falantes mecânicos, essa diferença provocada pelos componentes padronizados seria praticamente desprezível.
 
 ## iv. Conclusões
 O projeto cumpriu os requisitos especificados, entregando uma ferramenta funcional capaz de automatizar o projeto de crossovers. O maior desafio durante o desenvolvimento foi deduzir a função de transferência do passa-altas.
